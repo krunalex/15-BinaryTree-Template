@@ -1,5 +1,7 @@
 package Model;
 
+import java.applet.AppletContext;
+
 /**
  * <p>
  * Materialien zu den zentralen NRW-Abiturpruefungen im Fach Informatik ab 2018
@@ -52,7 +54,7 @@ public class BinaryTree<ContentType> {
 	 * Nach dem Aufruf des Konstruktors existiert ein leerer Binaerbaum.
 	 */
 	public BinaryTree() {
-		//TODO 01a
+		this.node = null;
 	}
 
 	/**
@@ -65,7 +67,11 @@ public class BinaryTree<ContentType> {
 	 *            das Inhaltsobjekt des Wurzelknotens vom Typ CT
 	 */
 	public BinaryTree(ContentType pContent) {
-		//TODO 01b
+		if(pContent != null){
+			this.node = new BTNode<>(pContent);
+		}else{
+			this.node = null;
+		}
 	}
 
 	/**
@@ -84,7 +90,21 @@ public class BinaryTree<ContentType> {
 	 *            der rechte Teilbaum vom Typ BinaryTree<CT>
 	 */
 	public BinaryTree(ContentType pContent, BinaryTree<ContentType> pLeftTree, BinaryTree<ContentType> pRightTree) {
-		//TODO 01c
+		if(pContent != null){
+			node = new BTNode<>(pContent);
+			if(pLeftTree != null){
+				node.left = pLeftTree;
+			}else{
+				node.left = new BinaryTree<>();
+			}
+			if(pRightTree != null){
+				node.right = pLeftTree;
+			}else{
+				node.right = new BinaryTree<>();
+			}
+		}else{
+			node = null;
+		}
 	}
 
 	/**
@@ -94,8 +114,11 @@ public class BinaryTree<ContentType> {
 	 * @return true, falls der Binaerbaum leer ist, sonst false
 	 */
 	public boolean isEmpty() {
-		//TODO 01d
-		return false;
+		if(node.content == null){
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	/**
@@ -109,7 +132,15 @@ public class BinaryTree<ContentType> {
 	 *            neues Inhaltsobjekt vom Typ CT
 	 */
 	public void setContent(ContentType pContent) {
-		//TODO 01e
+		if(pContent != null){
+			if(isEmpty()){
+				node.content = pContent;
+				node.left = null;
+				node.right = null;
+			}else{
+				node.content = pContent;
+			}
+		}
 	}
 
 	/**
@@ -120,8 +151,11 @@ public class BinaryTree<ContentType> {
 	 *         der Binaerbaum leer ist
 	 */
 	public ContentType getContent() {
-		//TODO 01f
-		return null;
+		if(!isEmpty()){
+			return node.content;
+		}else{
+			return null;
+		}
 	}
 
 	/**
@@ -133,7 +167,11 @@ public class BinaryTree<ContentType> {
 	 *            neuer linker Teilbaum vom Typ BinaryTree<CT>
 	 */
 	public void setLeftTree(BinaryTree<ContentType> pTree) {
-		//TODO 01g
+		if(pTree != null){
+			if(!isEmpty()){
+				node.left = pTree;
+			}
+		}
 	}
 
 	/**
@@ -145,7 +183,11 @@ public class BinaryTree<ContentType> {
 	 *            neuer linker Teilbaum vom Typ BinaryTree<CT>
 	 */
 	public void setRightTree(BinaryTree<ContentType> pTree) {
-		//TODO 01h
+		if(pTree != null){
+			if(!isEmpty()){
+				node.right = pTree;
+			}
+		}
 	}
 
 	/**
@@ -156,8 +198,11 @@ public class BinaryTree<ContentType> {
 	 * der aktuelle Binaerbaum leer ist
 	 */
 	public BinaryTree<ContentType> getLeftTree() {
-		//TODO 01i
-		return null;
+		if(!isEmpty()){
+			return node.left;
+		}else{
+			return null;
+		}
 	}
 
 	/**
@@ -168,8 +213,11 @@ public class BinaryTree<ContentType> {
 	 * der aktuelle Binaerbaum (this) leer ist
 	 */
 	public BinaryTree<ContentType> getRightTree() {
-		//TODO 01j
-		return null;
+		if(!isEmpty()){
+			return node.right;
+		}else{
+			return null;
+		}
 	}
 
 }
