@@ -98,7 +98,7 @@ public class BinaryTree<ContentType> {
 				node.left = new BinaryTree<>();
 			}
 			if(pRightTree != null){
-				node.right = pLeftTree;
+				node.right = pRightTree;
 			}else{
 				node.right = new BinaryTree<>();
 			}
@@ -114,11 +114,7 @@ public class BinaryTree<ContentType> {
 	 * @return true, falls der Binaerbaum leer ist, sonst false
 	 */
 	public boolean isEmpty() {
-		if(node.content == null){
-			return true;
-		}else{
-			return false;
-		}
+		return node == null;
 	}
 
 	/**
@@ -134,9 +130,7 @@ public class BinaryTree<ContentType> {
 	public void setContent(ContentType pContent) {
 		if(pContent != null){
 			if(isEmpty()){
-				node.content = pContent;
-				node.left = null;
-				node.right = null;
+				node = new BTNode<>(pContent);
 			}else{
 				node.content = pContent;
 			}
@@ -167,10 +161,8 @@ public class BinaryTree<ContentType> {
 	 *            neuer linker Teilbaum vom Typ BinaryTree<CT>
 	 */
 	public void setLeftTree(BinaryTree<ContentType> pTree) {
-		if(pTree != null){
-			if(!isEmpty()){
-				node.left = pTree;
-			}
+		if(pTree != null && !isEmpty()){
+			node.left = pTree;
 		}
 	}
 
@@ -183,10 +175,8 @@ public class BinaryTree<ContentType> {
 	 *            neuer linker Teilbaum vom Typ BinaryTree<CT>
 	 */
 	public void setRightTree(BinaryTree<ContentType> pTree) {
-		if(pTree != null){
-			if(!isEmpty()){
-				node.right = pTree;
-			}
+		if(pTree != null && !isEmpty()){
+			node.right = pTree;
 		}
 	}
 
